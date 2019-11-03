@@ -11,6 +11,8 @@ Would be validators stake in on an Ethereum contract. The contract sorts and sel
 This module reads the contract and reports the new set of validators to Tendermint.
 Shards can communicate with each other using IBC.
 
+![](diagram.png)
+
 ### DeFi
 
 Decentralizing existing financial products on blockchain is an important effort to remove the crucial, exploitable and unreliable element of trust for finance.
