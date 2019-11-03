@@ -2,7 +2,6 @@ package potatoshards
 
 import (
 	"encoding/json"
-	"math/rand"
 
 	"github.com/gorilla/mux"
 	"github.com/spf13/cobra"
@@ -17,17 +16,24 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	sim "github.com/cosmos/cosmos-sdk/x/simulation"
 	"github.com/cosmos/cosmos-sdk/x/staking/client/cli"
 	"github.com/cosmos/cosmos-sdk/x/staking/client/rest"
-	"github.com/cosmos/cosmos-sdk/x/staking/simulation"
-	"github.com/cosmos/cosmos-sdk/x/staking/types"
 )
+
+
+const (
+	ModuleName = "potatoshards"
+	StoreKey = ModuleName
+	RouterKey = ModuleName
+	QuerierRoute = ModuleName
+)
+
+
+
 
 var (
 	_ module.AppModule           = AppModule{}
 	_ module.AppModuleBasic      = AppModuleBasic{}
-	_ module.AppModuleSimulation = AppModuleSimulation{}
 )
 
 // AppModuleBasic defines the basic application module used by the potatoshards module.
@@ -58,7 +64,8 @@ func (AppModuleBasic) ValidateGenesis(bz json.RawMessage) error {
 	if err != nil {
 		return err
 	}
-	return ValidateGenesis(data)
+	// nothing to do :)
+	return nil
 }
 
 // RegisterRESTRoutes registers the REST routes for the potatoshards module.
@@ -99,30 +106,9 @@ func (AppModuleBasic) BuildCreateValidatorMsg(cliCtx context.CLIContext,
 
 //____________________________________________________________________________
 
-// AppModuleSimulation defines the module simulation functions used by the potatoshards module.
-type AppModuleSimulation struct{}
-
-// RegisterStoreDecoder registers a decoder for potatoshards module's types
-func (AppModuleSimulation) RegisterStoreDecoder(sdr sdk.StoreDecoderRegistry) {
-	sdr[StoreKey] = simulation.DecodeStore
-}
-
-// GenerateGenesisState creates a randomized GenState of the potatoshards module.
-func (AppModuleSimulation) GenerateGenesisState(simState *module.SimulationState) {
-	simulation.RandomizedGenState(simState)
-}
-
-// RandomizedParams creates randomized potatoshards param changes for the simulator.
-func (AppModuleSimulation) RandomizedParams(r *rand.Rand) []sim.ParamChange {
-	return simulation.ParamChanges(r)
-}
-
-//____________________________________________________________________________
-
 // AppModule implements an application module for the potatoshards module.
 type AppModule struct {
 	AppModuleBasic
-	AppModuleSimulation
 }
 
 // NewAppModule creates a new AppModule object
@@ -130,7 +116,6 @@ func NewAppModule() AppModule {
 
 	return AppModule{
 		AppModuleBasic:      AppModuleBasic{},
-		AppModuleSimulation: AppModuleSimulation{},
 	}
 }
 
@@ -141,7 +126,7 @@ func (AppModule) Name() string {
 
 // RegisterInvariants registers the potatoshards module invariants.
 func (am AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {
-	RegisterInvariants(ir, am.keeper)
+	// nothing to do
 }
 
 // Route returns the message routing key for the potatoshards module.
@@ -174,7 +159,7 @@ func (am AppModule) InitGenesis(ctx sdk.Context, data json.RawMessage) []abci.Va
 // ExportGenesis returns the exported genesis state as raw bytes for the potatoshards
 // module.
 func (am AppModule) ExportGenesis(ctx sdk.Context) json.RawMessage {
-	gs := ExportGenesis(ctx, am.keeper)
+	gs := ExportGenesis(ctx)
 	return ModuleCdc.MustMarshalJSON(gs)
 }
 

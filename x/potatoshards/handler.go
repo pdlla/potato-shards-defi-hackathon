@@ -2,15 +2,9 @@ package potatoshards
 
 import (
 	"fmt"
-	"log"
-	"math/big"
 
-	// Vendor imports
-	"github.com/tendermint/tendermint/libs/common"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
-
-const ModuleName = "potatoshards"
 
 func NewHandler() sdk.Handler {
 	return func(ctx sdk.Context, msg sdk.Msg) sdk.Result {

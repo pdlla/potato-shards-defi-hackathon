@@ -5,21 +5,17 @@ import (
 	"math/big"
 
 	abci "github.com/tendermint/tendermint/abci/types"
-	"github.com/tendermint/tendermint/libs/common"
-	tmtypes "github.com/tendermint/tendermint/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 
 const providerURL = "wss://rinkeby.infura.io/ws"
-const contractAddress = common.HexToAddress("0x0D8A07e01Fd9b3DA4ce78109DBDFd385bE59bAE2")
+const contractAddress = "0x0D8A07e01Fd9b3DA4ce78109DBDFd385bE59bAE2"
 const ethGenesisNumber = "12345"
 const shardNumber = 0
 
@@ -34,7 +30,7 @@ func getValidators() []abci.ValidatorUpdate {
 		log.Fatal(err)
 	}
 
-	contract, err := NewPotato(contractAddress, client)
+	contract, err := NewPotato(common.HexToAddress(contractAddress), client)
 
 	if err != nil {
 		log.Fatal(err)
@@ -60,7 +56,9 @@ func getValidators() []abci.ValidatorUpdate {
 	r := make([]abci.ValidatorUpdate,len(addrs))
 	for i:=0; i < len(addrs); i++ {
 		key := make([]byte,0)
-		key = append(key, addrs[i]...);
+		for j:=0; j < len(addrs[i]); j++ {
+			key = append(key, addrs[i][j]...);
+		}
 		r[i] = abci.Ed25519ValidatorUpdate(key, 1)
 	}
 
