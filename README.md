@@ -6,31 +6,29 @@ Built for 2019 DeFi hackathon. This is a proof of concept implementation. See Fu
 
 ### Concept
 
-This module will help you launch a chain that where validators are selected from an Ethereum smart contract.
-
+This module allows you to launch a chain that where validators are selected from an Ethereum smart contract.
 Would be validators stake in on an Ethereum contract. The contract sorts and selects validators for each shard.
-
 This module reads the contract and reports the new set of validators to Tendermint.
-
 Shards can communicate with each other using IBC.
 
-#### DeFi
+### DeFi
 
 Decentralizing existing financial products on blockchain is an important effort to remove the crucial, exploitable and unreliable element of trust for finance.
 However, if decentralization is as much a paradigm shift to technology as evangelists claim there should entirely new finance innovations out there that are incommensurable with anything in existing finance.
-In this regard, the existing blockchain economy has already introduce numerous unprecedented financial products.
+In this regard, the existing blockchain economy has already introduce myriad new and unprecedented financial products.
 
 One such product is staking which is still VERY NEW. No PoS blockchain currently has the market cap of leading PoW chains and their behavior is highly dependent on initial stake distribution.
+The economics and behavior behind staking are largely unexplored. 
 Thus the claim is that staking should be considered a first class DeFi product and one that has huge amounts of unexplored potential.
 
 This project aims to create another mechanism for staking to demonstrate how simple it is to come up with new powerful configurations.
 
-In practice, sharded chains that select validators based on staking conditions in Ethereum can be great in practice.
+In practice, sharded chains that select validators based on staking conditions in Ethereum have many use cases.
 It leverages security guarantees of Ethereum and speed of classical consensus (see hybrid consensus by Shi et. al).
-It is extremely simple for the average user to understand and builds of the most widely used smart contract platform.
-It allows for small and secure validator sets to run low-value side chains.
-In particular, the inspiration for this idea was taken from free 2 play single player games with multiplayer components such as farmville.
-Each user's game can thus be its own shard and anyone can stake in on the contract to run validator nodes and earn rewards in game.
+It is extremely simple for the average user to understand and builds on the most widely used smart contract platform.
+It allows for small and secure validator sets to run low-value chains securely.
+In particular, the inspiration for this idea was taken from free 2 play single player games that run on centralized servers (such as farmville).
+In this scenario, each user's game can thus be its own shard and anyone can stake in on the contract to run validator nodes and perhaps earn rewards in game in return.
 this is very promising use case for `potatoshards` and could largely replace centralized servers for this genre of games. 
 
 As future work, the author of this project is also excited to use blockchain games that double as closed economies to explore and play with new radical and unprecedented markets.    
